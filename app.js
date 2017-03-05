@@ -66,9 +66,19 @@ var mongoose = require('mongoose');
 
 var app = express();
 
+Provider = require('./models/provider');
 
 app.get('/',function(req, res){
     res.send('hello world nodemon2') ;
+});
+
+app.get('/api/providers', function (req, response) {
+    Provider.getProviders(function (err, providers) {
+        if(err){
+            throw err;
+        }
+        response.json(providers);
+    })
 });
 
 mongoose.connect('mongodb://localhost/casino');
