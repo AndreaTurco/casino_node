@@ -72,6 +72,7 @@ app.get('/',function(req, res){
     res.send('hello world nodemon2') ;
 });
 
+// app.get('/api/providers/:id req.params.id', function (req, response) {
 app.get('/api/providers', function (req, response) {
     Provider.getProviders(function (err, providers) {
         if(err){

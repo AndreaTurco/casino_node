@@ -1,27 +1,31 @@
 var mongoose = require('mongoose');
 
-var providerSchema = mongoose.schema({
+var providerSchema = mongoose.Schema({
     name: {
         type: String,
+        trim: true,
         required : true
     },
     public_id: {
-        type: int,
+        type: Number,
         required : true
     },
     backoffice_url: {
         type: String,
+        trim: true,
         default : ""
     },
     games_list: {
+        type: Array,
         default: {}
     },
     configuration_api: {
-        type: [],
+        type: Array,
         required : true
     },
     active: {
-        default: true
+        type : String,
+        default : '1'
     },
     created_tstamp: {
         type: Date,
@@ -29,7 +33,7 @@ var providerSchema = mongoose.schema({
     }
 });
 
-var Provider = mongoose.exports = mongoose.modal('Provider',providerSchema);
+var Provider = mongoose.exports = mongoose.model('Provider',providerSchema);
 
 module.exports.getProviders = function (callback, limit) {
     Provider.find(callback).limit(limit);
